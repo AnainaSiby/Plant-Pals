@@ -17,13 +17,14 @@ export default function SignUp() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const url = "http://localhost:9000/api/addplant";
+    const url = "http://localhost:9000/api/signup";
     AXIOS.post(url, { name, email, phone, password }).then((res) => {
       var stat = res.data.status;
       if (stat) {
-        alert(res.data.message);
+        alert(res.data.msg);
+        handleClose();
       } else {
-        alert(res.data.message);
+        alert(res.data.msg);
       }
     });
   };
@@ -89,6 +90,7 @@ export default function SignUp() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 size="small"
+                type="password"
               />
             </Form.Group>
             <Button
