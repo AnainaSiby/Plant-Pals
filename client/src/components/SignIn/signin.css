@@ -1,0 +1,56 @@
+.signup-form form{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px !important;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+}
+
+.signup-form{
+    margin-top: 100px;
+    width: 30% !important;
+}
+
+*, ::after{
+    box-shadow: none !important;
+}
+
+.formHead {
+    padding: 10px;
+    padding-bottom: 20px;
+  }
+  
+
+  .app-name{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: #198754;
+  }
+
+  .formControl{
+    width: 90% !important;
+  }
+
+  .regbtn {
+    width: 91% !important;
+    font-weight: bolder !important;
+    background-color: #1f6f4a !important;
+  }
+  
+  .regbtn:hover{
+    background-color: transparent !important;
+    border: 1px #198754 solid !important;
+    color: #198754;
+  }
+
+  .nw-user{
+    margin-top: 30px;
+  }
+
+  .nw-user a{
+    color: #198754 !important;
+    font-weight: 500;
+  }

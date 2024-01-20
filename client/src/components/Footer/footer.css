@@ -1,0 +1,27 @@
+.f-head{
+    color: rgb(213, 196, 196);
+    text-align: center;
+    font-size:25px;
+    padding: 15px;
+    background-color: #198754;
+}
+
+.f-head svg{
+    font-size: larger;
+}
+
+.f-end hr{
+    color: #198754
+}
+
+.f-copy{
+    padding: 15px;
+    text-align: center;
+    color: rgb(134, 131, 131);
+    font-size: smaller;
+    background-color: #d5eadc;
+}
+
+.f-end{
+    background-color: #eff8f2;
+}

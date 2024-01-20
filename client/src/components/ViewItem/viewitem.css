@@ -1,0 +1,48 @@
+.plant-main{
+    margin-top: 130px;
+    padding-bottom: 20px;
+}
+
+.plant-details{
+    margin-left: 40px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.plant-details .p-name{
+    text-align: center;
+    font-size: 40px;
+    font-weight:500;
+}
+
+.plant-details .p-code{
+    margin-top: 20px;
+    text-align: center;
+    color: rgb(135, 128, 128);
+}
+
+.plant-details .p-price{
+    text-align: center;
+    margin-top: 20px;
+    font-size: 30px;
+    font-weight:500;
+    color: #198754;
+}
+
+
+.about-the-plant{
+    margin-top: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+hr{
+    margin-bottom: 30px !important;
+}
+
+.plant-details button{
+   margin-top: 25px;
+   padding: 10px 100px ;
+}

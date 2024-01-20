@@ -1,0 +1,22 @@
+.plant-card{
+    margin-bottom: 30px !important;
+}
+
+.plant-card .plant-name{
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: #095f37;
+
+}
+
+.plant-card .plant-price{
+    margin-top: 15px;
+    color: #2aa16a;
+    text-align: center;
+}
+
+a{
+    text-decoration: none !important;
+}

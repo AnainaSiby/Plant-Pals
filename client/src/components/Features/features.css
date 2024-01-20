@@ -1,0 +1,46 @@
+.playvideo{
+    background-color: #eff8f2;
+    padding-bottom: 40px;
+}
+
+.vcol{
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    place-content: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.fea{
+    text-align: center;
+}
+
+.fea svg{
+  font-size: 80px;
+  color: #198754;
+}
+
+.fea-row{
+    background-color: #eff8f2;
+    padding-top: 50px;
+    text-align: center;
+    padding-bottom: 40px;
+}
+
+.fea-head{
+    color: #198754;
+   padding-bottom: 30px;
+}
+
+.fea-end{
+    padding-top: 60px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.fea-end h3{
+    color: #198754;
+    padding-bottom: 20px;
+}
