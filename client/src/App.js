@@ -8,6 +8,9 @@ const AdminViewPlants = lazy(()=> import('./admin/viewplants.jsx'))
 const AdminShowPlant = lazy(()=>import('./admin/showplant.jsx'))
 const ShopNow = lazy(()=>import('./pages/shop.jsx'))
 const ViewProduct = lazy(()=>import('./pages/viewproduct.jsx'))
+const UserHome = lazy(()=>import('./user/userhome.jsx'))
+const AboutPage = lazy(()=>import('./pages/aboutPage/aboutpage.jsx'))
+const Cart = lazy(()=>import('./user/cart/cart.jsx'))
 
 function App() {
   return (
@@ -23,6 +26,9 @@ function App() {
         <Route path="/plant/:id" element={<AdminShowPlant />} />
         <Route path="/shop" element={<ShopNow/>}/>
         <Route path="/item/:id" element={<ViewProduct/>}/>
+        <Route path="/userhome" element={<UserHome/>}/>
+        <Route path="/aboutus" element={<AboutPage/>}/>
+        <Route path="/cart" element={<Cart/>}/>
       </Routes>
       </Suspense>
     </>

@@ -5,6 +5,7 @@ import { Form, Container } from "react-bootstrap";
 import { TextField, Button } from "@mui/material";
 import AXIOS from "axios";
 import "./signin.css";
+import { useNavigate } from "react-router-dom";
 
 export default function SignIn() {
   const [open, setOpen] = React.useState(false);
@@ -12,17 +13,24 @@ export default function SignIn() {
   const handleClose = () => setOpen(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const nav = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const url = "http://localhost:9000/api/addplant";
+    const url = "http://localhost:9000/api/signin";
     AXIOS.post(url, { email, password }).then((res) => {
       var stat = res.data.status;
       if (stat) {
-        alert(res.data.message);
+        sessionStorage.setItem("userid",res.data.userid)
+        nav('/userhome')
+        setEmail("")
+        setPassword("")
+        handleClose();
       } else {
-        alert(res.data.message);
+        alert(res.data.msg);
       }
+    }).catch((error) => {
+      console.error("Error during sign-in:", error);
     });
   };
 

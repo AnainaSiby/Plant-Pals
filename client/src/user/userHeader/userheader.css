@@ -1,0 +1,47 @@
+.header1{
+    background-color: #114b30;
+    padding: 6px;
+    display: flex;
+    justify-content: space-around;
+    color: rgb(210, 203, 203);
+}
+
+*{
+    margin-bottom: 0 !important;
+}
+
+.d-flex input:focus{
+    box-shadow: none !important;
+    border: #198754 1px solid !important;
+}
+
+.fixed-top {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Adjust the z-index as needed */
+  }
+  
+  .profile-cart {
+    display: flex;
+  }
+
+  .profile-cart button{
+    background-color: transparent;
+    color:#198754;
+    border: none;
+  }
+
+  .profile-cart button:hover{
+    background-color: transparent;
+    color:#198754;
+    border: none;
+    font-size: large;
+  }
+
+  .profile-cart button:focus{
+    background-color: transparent;
+    color:#198754;
+    border: none;
+    font-size: large;
+  }

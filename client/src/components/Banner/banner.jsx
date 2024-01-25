@@ -1,7 +1,15 @@
 import Carousel from 'react-bootstrap/Carousel';
 import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 function Banner() {
+
+ const nav = useNavigate();
+
+ const handleClick = ()=>{
+     nav('/shop')
+  }
+
   return (
     <Carousel indicators={false}>
       <Carousel.Item interval={1000}>
@@ -12,7 +20,7 @@ function Banner() {
         alt="First slide" 
         style={{width:"100%"}}/>
         <Carousel.Caption className='slide'>
-          <Button variant="success">SHOP NOW</Button>
+          <Button variant="success" onClick={handleClick}>SHOP NOW</Button>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item interval={1000}>
@@ -23,7 +31,7 @@ function Banner() {
         alt="Second slide" 
         style={{width:"100%"}} />
         <Carousel.Caption className='slide'>
-          <Button variant="success">SHOP NOW</Button>
+          <Button variant="success" onClick={handleClick}>SHOP NOW</Button>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item interval={1000}>
@@ -34,7 +42,7 @@ function Banner() {
         alt="Third slide" 
         style={{width:"100%"}} />
         <Carousel.Caption className='slide'>
-          <Button variant="success">SHOP NOW</Button>
+          <Button variant="success" onClick={handleClick}>SHOP NOW</Button>
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>

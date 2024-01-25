@@ -22,6 +22,10 @@ export default function SignUp() {
       var stat = res.data.status;
       if (stat) {
         alert(res.data.msg);
+        setName("");
+        setEmail("");
+        setPhone("");
+        setPassword("")
         handleClose();
       } else {
         alert(res.data.msg);

@@ -27,7 +27,7 @@ function Header() {
             navbarScroll
           >
             <Nav.Link  href="/" className='text-success'>Home</Nav.Link>
-            <Nav.Link  href="#about" className='text-success'>About US</Nav.Link>
+            <Nav.Link  href="/aboutus" className='text-success'>About US</Nav.Link>
             <Nav.Link  href="/shop" className='text-success'>Visit Store</Nav.Link>
           </Nav>
           <Form className="d-flex">

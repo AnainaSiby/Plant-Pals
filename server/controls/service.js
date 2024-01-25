@@ -1,4 +1,4 @@
-const { plantModel,userModel } = require("../model/db_config.js");
+const { plantModel, userModel } = require("../model/db_config.js");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
@@ -92,9 +92,32 @@ const signUp = async (req, res) => {
   }
 };
 
+const signIn = async (req, res) => {
+  const { email, password } = req.body;
+  
+  const results = await userModel.find({ email: email });
+  if (results.length == 0) {
+    res.json({ msg: "Incorrect Email", status: false });
+  } else {
+    const hashedpassword = results[0].password;
+    bcrypt.compare(password, hashedpassword, function (err, result) {
+      if (result == true) {
+        res.json({
+          msg: "Login Successful",
+          status: true,
+          userid: results[0]._id,
+        });
+      } else {
+        res.json({ msg: "Incorrect Password", status: false });
+      }
+    });
+  }
+};
+
 module.exports = {
   registerPlant,
   getPlants,
   showPlant,
   signUp,
+  signIn,
 };
