@@ -63,7 +63,34 @@ const userSchema = mongoose.Schema(
 
 const userModel = mongoose.model("users", userSchema);
 
+const cartSchema = mongoose.Schema(
+  {
+    pcode: {
+      type: String,
+      requied: true,
+    },
+    name: {
+      type: String,
+      requied: true,
+    },
+    price: {
+      type: Number,
+      requied: true,
+    },
+    images: {
+      type: [String],
+      requied: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+const cartModel = mongoose.model("cart",cartSchema)
+
 module.exports = {
   plantModel,
   userModel,
+  cartModel
 };

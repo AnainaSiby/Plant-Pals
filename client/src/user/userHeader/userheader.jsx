@@ -4,8 +4,6 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import SignIn from "../../components/SignIn/signin";
-import SignUp from "../../components/SignUp/signup";
 import { RiLogoutCircleRFill } from "react-icons/ri";
 import { FaCartShopping } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
@@ -54,8 +52,6 @@ function UserHeader() {
                 <Button variant="outline-success">Search</Button>
               </Form>
               <div className="profile-cart">
-                <SignUp />
-                <SignIn />
                 <Button title="Logout">
                   <RiLogoutCircleRFill />
                 </Button>

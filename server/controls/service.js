@@ -1,4 +1,4 @@
-const { plantModel, userModel } = require("../model/db_config.js");
+const { plantModel, userModel,cartModel } = require("../model/db_config.js");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
@@ -48,6 +48,43 @@ const showPlant = async (request, response) => {
     console.log(error);
   }
 };
+
+
+//Update
+const updatePlant =async (request,response) =>{
+  try{
+    const {id} = request.params;
+    const result = await plantModel.findByIdAndUpdate(id,request.body);
+
+    if(!result) {
+      response.json({"status":false , "message":"Id not found"})
+    }else{
+      response.json({"status":true, "message":"Updated successfully"})
+    }
+  }
+  catch(err){
+    console.log(err)
+  }
+}
+
+//Delete
+
+const deletePlant = async (request,response)=>{
+  try{
+    const {id} = request.params;
+    const result = await plantModel.findByIdAndDelete(id);
+
+    if(result){
+      response.json({"status":true, "message":"Plant deleted successfully!"})
+    }else{
+      response.json({"status":false, "message":"plant not found!"})
+    }
+  }
+  catch(error){
+    console.log(error)
+  }
+}
+
 
 const signUp = async (req, res) => {
   try {
@@ -114,10 +151,13 @@ const signIn = async (req, res) => {
   }
 };
 
+
 module.exports = {
   registerPlant,
   getPlants,
   showPlant,
   signUp,
   signIn,
+  updatePlant,
+  deletePlant
 };

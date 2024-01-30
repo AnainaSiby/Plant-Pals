@@ -2,7 +2,8 @@ import "./show_plant.css";
 import { useParams } from "react-router-dom/dist";
 import AXIOS from "axios";
 import { useState, useEffect } from "react";
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Col, Container, Button } from "react-bootstrap";
+import DeletePlant from "../delete_plants/delete_plants";
 
 export default function ShowPlant() {
   const [plant, setPlant] = useState([]);
@@ -41,11 +42,16 @@ export default function ShowPlant() {
                 {plant.pcode}
               </div>
               <div className="p-price"> ₹ {plant.price}</div>
+              <div className="option-btns">
+              <a href={`/admin_edit/${plant._id}`}>
+                <Button variant="success">EDIT</Button> </a>
+               <DeletePlant/> 
+              </div>
+              <Row className="about-the-plant">
+          <Col>{plant.description}</Col>
+        </Row>
             </Container>
           </Col>
-        </Row>
-        <Row className="about the plant">
-          <Col>{plant.description}</Col>
         </Row>
       </Container>
     </div>

@@ -1,4 +1,4 @@
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col,Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import "./view_plant.css";
 import AXIOS from "axios";
@@ -18,11 +18,10 @@ export default function ViewPlants() {
     <div>
       <Container>
         <Row>
-          <Col lg={3}>admin bar</Col>
           <Col className="plant-cards">
             <Row>
               {plants.map((plant, index) => (
-                <Col lg={4}>
+                <Col lg={3}>
                   <div key={plant._id}>
                   <div className="plant-card">
                     <a href={`/plant/${plant._id}`}>
@@ -36,6 +35,11 @@ export default function ViewPlants() {
                       <div className="plant-name">{plant.name}</div>
                       </a>
                       <div className="plant-price">₹ {plant.price}</div>
+                      <div className="view-prod-btn">
+                    <a href={`/plant/${plant._id}`}>
+                          <Button variant="success">View Product</Button>
+                        </a>
+                        </div>
                     </div>
                   </div>
                 </Col>

@@ -8,6 +8,7 @@ import Footer from '../components/Footer/footer.jsx'
 export default function UserHome(){
   return(
       <div>
+       
         <UserHeader/>
           <Banner/>
           <About/>
