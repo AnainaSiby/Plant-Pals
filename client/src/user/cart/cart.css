@@ -44,7 +44,7 @@
 
 .total-cart-value{
     display: flex;
-   justify-content: end;
+   justify-content:flex-end;
    margin-top: 20px;
    padding-right: 40px;
 }

@@ -226,22 +226,22 @@ const viewCart = async (request, response) => {
 
 //delete cart item
 
-const deleteCart = async (request,response)=>{
-  try{
-    const {id} = request.params;
-    const result = await cartModel.findByIdAndDelete(id);
+const deleteCart = async (request, response) => {
+  try {
+    const { pcode } = request.params;
+    const filter = { pcode: pcode };
+    const result = await cartModel.deleteMany(filter);
 
-    if(result){
-      response.json({"status":true, "message":"Item have been removed from cart!"})
-    }else{
-      response.json({"status":false, "message":"Item not found!"})
+    if (result.deletedCount > 0) {
+      response.json({ "status": true, "message": "Items have been removed from cart!" });
+    } else {
+      response.json({ "status": false, "message": "Items not found!" });
     }
-  }
-  catch(error){
-    console.log(error)
-  }
+  } catch (error) {
+    console.error("Error occurred while deleting documents", error);
+    response.status(500).json({ "status": false, "message": "Internal server error" });
+  }
 }
-
 
 module.exports = {
   registerPlant,

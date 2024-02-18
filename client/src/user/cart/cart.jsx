@@ -9,7 +9,11 @@ import DeleteCart from "./cartdelete";
 export default function Cart() {
   const [cart, setCart] = useState([]);
  const [email, setEmail] = useState("");
- console.log("cartt", cart)
+
+ useEffect(() => {
+  fetchCartData(email);
+ }, [])
+ 
 
  const fetchCartData = async (email) => {
   try {
@@ -23,9 +27,13 @@ export default function Cart() {
   }
 };
   
-const handleQuantityChange = (index, event) => {
+  const handleQuantityChange = (index, event) => {
   const selectedQuantity = parseInt(event.target.value);
-  const updatedCart = cart.map((item, idx) => {
+  const updatedCart = cart.filter((item, index, self) =>
+  index === self.findIndex((t) => (
+    t.pcode === item.pcode 
+  ))
+).map((item, idx) => {
     if (idx === index) {
       // Update quantity and total price for the selected item
       return {
@@ -36,7 +44,7 @@ const handleQuantityChange = (index, event) => {
     }
     return item;
   });
-  setCart(updatedCart);
+  setCart(updatedCart); 
 };
 
 // Calculate total cart value
@@ -48,7 +56,11 @@ const totalCartValue = cart.reduce((total, cartItem) => {
   return (
     <div>
       <Container className="cart-container">
-      <UserHeader userEmail={(email)=>{
+      <UserHeader cartNo={cart.filter((item, index, self) =>
+  index === self.findIndex((t) => (
+    t.pcode === item.pcode 
+  ))
+).length} userEmail={(email)=>{
           setEmail(email);
           fetchCartData(email);
       }}/>
@@ -63,7 +75,11 @@ const totalCartValue = cart.reduce((total, cartItem) => {
             </div>
             <hr/>
             <ul>
-              {cart.map((cartItem, index) => (
+              {cart.filter((item, index, self) =>
+  index === self.findIndex((t) => (
+    t.pcode === item.pcode 
+  ))
+).map((cartItem, index) => (
                 <li key={index}>
                   <Row className="cart-list">
                     <Col>
@@ -99,7 +115,7 @@ const totalCartValue = cart.reduce((total, cartItem) => {
                       </Row>
                     </Col>
                     <Col className="cart-remove">
-                      <DeleteCart itemId={cartItem._id}/>
+                      <DeleteCart itemId={cartItem.pcode}/>
                     </Col>
                   </Row>
                 </li>

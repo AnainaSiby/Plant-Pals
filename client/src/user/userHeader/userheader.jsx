@@ -91,7 +91,7 @@ function UserHeader(props) {
                   <RiLogoutCircleRFill />
                 </Button>
                 <Button title="My Cart" onClick={handleViewcart}>
-                <FaCartShopping />
+                 <p>{props.cartNo}</p>
                 </Button>
               </div>
             </Navbar.Collapse>

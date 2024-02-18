@@ -25,7 +25,7 @@ router.route("/deleteplant/:id").delete(deletePlant);
 router.route("/userinfo").get(userInfo);
 router.route("/addtocart").post(addCart);
 router.route("/cart").post(viewCart);
-router.route("/deletecart/:id").delete(deleteCart);
+router.route("/deletecart/:pcode").delete(deleteCart);
 
 
 module.exports = router;

@@ -17,6 +17,7 @@ export default function DeleteCart(props) {
     AXIOS.delete(url).then((response) => {
       alert(response.data.message);
       handleClose();
+      window.location.reload();
     });
   };
 
