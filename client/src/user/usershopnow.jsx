@@ -1,10 +1,10 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import "./shopnow.css";
+import "./usershopnow.css";
 import AXIOS from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function ShopNow() {
+export default function UserShopNow() {
   const [plants, setPlants] = useState([]);
   const navigate = useNavigate();
 
@@ -16,7 +16,7 @@ export default function ShopNow() {
   }, []);
 
   const handleViewAll = ()=>{
-    navigate('/shop')
+    navigate('/usershop')
   }
 
   return (

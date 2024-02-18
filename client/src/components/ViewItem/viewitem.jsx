@@ -4,6 +4,7 @@ import AXIOS from "axios";
 import { useState, useEffect } from "react";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import { FaCartShopping } from "react-icons/fa6";
+import UserHeader from "../../user/userHeader/userheader";
 
 export default function ViewItem() {
   const [plant, setPlant] = useState([]);
@@ -15,6 +16,28 @@ export default function ViewItem() {
       setPlant(response.data.plant);
     });
   }, [id]);
+
+  const handleAddToCart = () =>{
+    const url = `http://localhost:9000/api/addtocart`;
+    let body = {
+      "pcode":plant.pcode,
+      "name":plant.name,
+      "price":plant.price,
+      "images":plant.images[0],
+      "email" : "logintest1@gmail.com"
+    }
+    AXIOS.post(url, body).then(
+      (res) => {
+        var stat = res.data.status;
+        if (stat) {
+          alert(res.data.message);
+        } else {
+          alert(res.data.message);
+        }
+      }
+    );
+  }
+
 
   const imageUrl =
     plant.images && plant.images.length > 0
@@ -43,7 +66,7 @@ export default function ViewItem() {
               </div>
               <div className="p-price"> ₹ {plant.price}</div>
               <div>
-              <Button variant="success"><FaCartShopping /><span style={{marginLeft:"10px"}}>ADD TO CART</span></Button>
+              <Button variant="success" onClick={handleAddToCart}><FaCartShopping /><span style={{marginLeft:"10px"}}>ADD TO CART</span></Button>
               </div>
             </Container>
           </Col>

@@ -19,9 +19,9 @@ export default function SignIn() {
     e.preventDefault();
     const url = "http://localhost:9000/api/signin";
     AXIOS.post(url, { email, password }).then((res) => {
-      var stat = res.data.status;
-      if (stat) {
-        sessionStorage.setItem("userid",res.data.userid)
+      const { status, token } = res.data;
+      if (status) {
+        sessionStorage.setItem("token", token);
         nav('/userhome')
         setEmail("")
         setPassword("")

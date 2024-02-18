@@ -7,12 +7,46 @@ import Navbar from "react-bootstrap/Navbar";
 import { RiLogoutCircleRFill } from "react-icons/ri";
 import { FaCartShopping } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import AXIOS from "axios";
+import { useDispatch } from "react-redux";
+import commonActions from "../../redux/actions/commonActions";
 
 function UserHeader() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const sess = sessionStorage.getItem("token");
+    const [userInfo, setuserInfo] = useState({});
     const handleViewcart = ()=>{
        navigate('/cart')
     }
+
+    const handleLogout = () =>{
+      navigate('/')
+    }
+ 
+    useEffect(() => {
+       user();
+    },[]);
+
+    const user = async () => {
+      const url = `http://localhost:9000/api/userinfo`;
+      try {
+        const token = sess; 
+        dispatch(commonActions.userInfo(token,dispatch))
+        const response = await AXIOS.get(url, {
+          headers: {
+            "x-access-token": token
+          }
+        });
+        setuserInfo(response?.data)
+        console.log("userinfo", userInfo);
+      } catch (error) {
+        console.error("Error fetching user information:", error);
+      }
+    };
+    
+
   return (
     <div className="fixed-top">
       <div className="header1">
@@ -32,16 +66,19 @@ function UserHeader() {
                 style={{ maxHeight: "100px" }}
                 navbarScroll
               >
-                <Nav.Link href="/" className="text-success">
+                <Nav.Link href="/userhome" className="text-success">
                   Home
                 </Nav.Link>
                 <Nav.Link href="/aboutus" className="text-success">
                   About US
                 </Nav.Link>
-                <Nav.Link href="/shop" className="text-success">
+                <Nav.Link href="/usershop" className="text-success">
                   Visit Store
                 </Nav.Link>
               </Nav>
+              <p className="userinfo">
+                Hi, {userInfo ? userInfo.name : "Loading..."}
+              </p>
               <Form className="d-flex">
                 <Form.Control
                   type="search"
@@ -52,7 +89,7 @@ function UserHeader() {
                 <Button variant="outline-success">Search</Button>
               </Form>
               <div className="profile-cart">
-                <Button title="Logout">
+                <Button title="Logout" onClick={handleLogout}>
                   <RiLogoutCircleRFill />
                 </Button>
                 <Button title="My Cart" onClick={handleViewcart}>

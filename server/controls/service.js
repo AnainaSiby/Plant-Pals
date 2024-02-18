@@ -1,6 +1,7 @@
 const { plantModel, userModel,cartModel } = require("../model/db_config.js");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
+const jwt = require('jsonwebtoken');
 
 const registerPlant = async (req, res) => {
   try {
@@ -129,27 +130,108 @@ const signUp = async (req, res) => {
   }
 };
 
+
 const signIn = async (req, res) => {
   const { email, password } = req.body;
   
-  const results = await userModel.find({ email: email });
-  if (results.length == 0) {
-    res.json({ msg: "Incorrect Email", status: false });
-  } else {
-    const hashedpassword = results[0].password;
-    bcrypt.compare(password, hashedpassword, function (err, result) {
-      if (result == true) {
-        res.json({
-          msg: "Login Successful",
-          status: true,
-          userid: results[0]._id,
-        });
-      } else {
-        res.json({ msg: "Incorrect Password", status: false });
-      }
+  try {
+    const user = await userModel.findOne({ email: email });
+    if (!user) {
+      return res.json({ msg: "Incorrect Email", status: false });
+    }
+
+    const isValidPassword = await bcrypt.compare(password, user.password);
+    if (!isValidPassword) {
+      return res.json({ msg: "Incorrect Password", status: false });
+    }
+
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+      expiresIn: '1h'
     });
+
+    res.json({
+      msg: "Login Successful",
+      status: true,
+      token: token
+    });
+  } catch (error) {
+    console.error("Error during sign-in:", error);
+    res.status(500).json({ msg: "Internal Server Error" });
   }
 };
+
+const userInfo =  (req, res) => {
+  const { id } = req.params;
+  let token = req.headers['x-access-token'];
+  if (!token) {
+    return res.status(401).json({ auth: false, message: 'No Token Provided' });
+  }
+ jwt.verify(token, process.env.JWT_SECRET, (err, decodedUser) => {
+    if (err) {
+      return res.status(403).json({ auth: false, message: 'Invalid Token' });
+    } else {
+      userModel.findById(decodedUser.userId)
+        .then(user => {
+if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+          }
+          res.status(200).json(user);
+        })
+        .catch(err => {
+          return res.status(500).json({ message: 'Error finding user' });
+        });
+    }
+  });
+};
+
+//add to cart
+
+const addCart = async (req, res) => {
+  try {
+    const { pcode, name, price, images, email } = req.body;
+    const product = {
+      pcode,
+      name,
+      price,
+      images,
+     email : req.body.email
+    };
+    await cartModel.create(product);
+    res.status(200).json({ message: 'Product added to cart successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+//view cart
+const viewCart = async (request, response) => {
+  try {
+    const userEmail = request.body.email;
+    const cart = await cartModel.find({ email: userEmail });
+    response.json({ status: true, carts: cart });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//delete cart item
+
+const deleteCart = async (request,response)=>{
+  try{
+    const {id} = request.params;
+    const result = await cartModel.findByIdAndDelete(id);
+
+    if(result){
+      response.json({"status":true, "message":"Item have been removed from cart!"})
+    }else{
+      response.json({"status":false, "message":"Item not found!"})
+    }
+  }
+  catch(error){
+    console.log(error)
+  }
+}
 
 
 module.exports = {
@@ -159,5 +241,9 @@ module.exports = {
   signUp,
   signIn,
   updatePlant,
-  deletePlant
+  deletePlant,
+  userInfo,
+  addCart,
+  viewCart,
+  deleteCart
 };

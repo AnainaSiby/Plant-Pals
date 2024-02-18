@@ -78,9 +78,13 @@ const cartSchema = mongoose.Schema(
       requied: true,
     },
     images: {
-      type: [String],
+      type: String,
       requied: true,
     },
+    email: {
+      type :String,
+      requied :true
+    }
   },
   {
     timestamps: true,

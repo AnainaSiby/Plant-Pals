@@ -45,3 +45,8 @@
     border: none;
     font-size: large;
   }
+
+  .userinfo{
+    padding-right: 20px;
+    color: #198754;
+  }

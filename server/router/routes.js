@@ -7,7 +7,11 @@ const {
   signUp,
   signIn,
   updatePlant,
-  deletePlant
+  deletePlant,
+  userInfo,
+  addCart,
+  viewCart,
+deleteCart
 } = require("../controls/service.js");
 const upload = require("../multer/uploads.js");
 
@@ -18,5 +22,10 @@ router.route("/signup").post(signUp);
 router.route("/signin").post(signIn);
 router.route("/editplant/:id").put(updatePlant);
 router.route("/deleteplant/:id").delete(deletePlant);
+router.route("/userinfo").get(userInfo);
+router.route("/addtocart").post(addCart);
+router.route("/cart").get(viewCart);
+router.route("/deletecart/:id").delete(deleteCart);
+
 
 module.exports = router;

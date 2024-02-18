@@ -19,7 +19,7 @@ export default function ViewPlants() {
       <Container>
         <Row>
           <Col className="plant-cards">
-            <Row>
+            <Row> 
               {plants.map((plant, index) => (
                 <Col lg={3}>
                   <div key={plant._id}>
