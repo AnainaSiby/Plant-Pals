@@ -2,40 +2,56 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import Footer from "../../components/Footer/footer";
 import UserHeader from "../userHeader/userheader";
 import "./cart.css";
-import AXIOS from "axios";
+import axios from "axios";
 import { useState, useEffect } from "react";
 import DeleteCart from "./cartdelete";
-import { useSelector } from "react-redux";
 
 export default function Cart() {
-  const [{ userInfo }] = useSelector((state) => [state.commonReducer])
   const [cart, setCart] = useState([]);
-console.log("userdetails", userInfo);
-  useEffect(() => {
-    const url = "http://localhost:9000/api/cart";
-    let body = {"email":"logintest1@gmail.com"}
-    AXIOS.get(url,body).then((response) => {
-      setCart(response.data.carts);
-    });
-  }, [cart]);
+ const [email, setEmail] = useState("");
+ console.log("cartt", cart)
 
-  const handleQuantityChange = (index, event) => {
-    const newCart = [...cart];
-    const selectedQuantity = parseInt(event.target.value);
-    newCart[index].quantity = selectedQuantity;
-    newCart[index].totalPrice = newCart[index].price * selectedQuantity;
-    setCart(newCart);
-  };
+ const fetchCartData = async (email) => {
+  try {
+    let body = {
+      "email" : email
+  }
+    const response = await axios.post('http://localhost:9000/api/cart', body);
+    setCart(response.data.carts);
+  } catch (error) {
+    console.error('Error fetching cart data:', error);
+  }
+};
+  
+const handleQuantityChange = (index, event) => {
+  const selectedQuantity = parseInt(event.target.value);
+  const updatedCart = cart.map((item, idx) => {
+    if (idx === index) {
+      // Update quantity and total price for the selected item
+      return {
+        ...item,
+        quantity: selectedQuantity,
+        totalPrice: selectedQuantity * item.price
+      };
+    }
+    return item;
+  });
+  setCart(updatedCart);
+};
 
-  // Calculate total cart value
-  const totalCartValue = cart.reduce((total, cartItem) => {
-    return total + (cartItem.totalPrice ? cartItem.totalPrice : cartItem.price);
-  }, 0);
+// Calculate total cart value
+const totalCartValue = cart.reduce((total, cartItem) => {
+  return total + (cartItem.totalPrice ? cartItem.totalPrice : cartItem.price);
+}, 0);
+
 
   return (
     <div>
-      <UserHeader />
       <Container className="cart-container">
+      <UserHeader userEmail={(email)=>{
+          setEmail(email);
+          fetchCartData(email);
+      }}/>
         <Row >
           <Col>
             <div className="cart-head">

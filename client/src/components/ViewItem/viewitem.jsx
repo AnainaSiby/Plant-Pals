@@ -8,6 +8,7 @@ import UserHeader from "../../user/userHeader/userheader";
 
 export default function ViewItem() {
   const [plant, setPlant] = useState([]);
+  const [email, setEmail] = useState("");
   const { id } = useParams();
 
   useEffect(() => {
@@ -24,7 +25,7 @@ export default function ViewItem() {
       "name":plant.name,
       "price":plant.price,
       "images":plant.images[0],
-      "email" : "logintest1@gmail.com"
+      "email" : email
     }
     AXIOS.post(url, body).then(
       (res) => {
@@ -38,7 +39,6 @@ export default function ViewItem() {
     );
   }
 
-
   const imageUrl =
     plant.images && plant.images.length > 0
       ? `http://localhost:9000/${plant.images[0]}`
@@ -47,6 +47,9 @@ export default function ViewItem() {
   return (
     <div>
       <Container>
+      <UserHeader userEmail={(email)=>{
+          setEmail(email);
+      }}/>
         <Row className="plant-main">
           <Col lg={6} className="plant-image">
             <div>

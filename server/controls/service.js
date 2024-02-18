@@ -206,13 +206,22 @@ const addCart = async (req, res) => {
 
 //view cart
 const viewCart = async (request, response) => {
-  try {
-    const userEmail = request.body.email;
-    const cart = await cartModel.find({ email: userEmail });
-    response.json({ status: true, carts: cart });
-  } catch (error) {
-    console.log(error);
+  const { email } = request.body;
+
+  if (!email) {
+      return response.status(400).json({ error: 'Email parameter is required' });
   }
+
+  try {
+      // Find cart items based on the provided email
+      const cartItems = await cartModel.find({ email });
+
+      response.json({ carts: cartItems });
+  } catch (error) {
+      console.error('Error fetching cart items:', error);
+      response.status(500).json({ error: 'Internal server error' });
+    }
+
 };
 
 //delete cart item

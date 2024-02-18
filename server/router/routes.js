@@ -24,7 +24,7 @@ router.route("/editplant/:id").put(updatePlant);
 router.route("/deleteplant/:id").delete(deletePlant);
 router.route("/userinfo").get(userInfo);
 router.route("/addtocart").post(addCart);
-router.route("/cart").get(viewCart);
+router.route("/cart").post(viewCart);
 router.route("/deletecart/:id").delete(deleteCart);
 
 

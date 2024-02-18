@@ -16,6 +16,7 @@ export default function DeleteCart(props) {
     const url = `http://localhost:9000/api/deletecart/${props.itemId}`;
     AXIOS.delete(url).then((response) => {
       alert(response.data.message);
+      handleClose();
     });
   };
 

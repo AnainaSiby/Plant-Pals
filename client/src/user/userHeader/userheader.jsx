@@ -9,14 +9,12 @@ import { FaCartShopping } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import AXIOS from "axios";
-import { useDispatch } from "react-redux";
-import commonActions from "../../redux/actions/commonActions";
 
-function UserHeader() {
+function UserHeader(props) {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const sess = sessionStorage.getItem("token");
     const [userInfo, setuserInfo] = useState({});
+    const {userEmail=()=>{}}=props
     const handleViewcart = ()=>{
        navigate('/cart')
     }
@@ -33,14 +31,14 @@ function UserHeader() {
       const url = `http://localhost:9000/api/userinfo`;
       try {
         const token = sess; 
-        dispatch(commonActions.userInfo(token,dispatch))
+        console.log("token",token);
         const response = await AXIOS.get(url, {
           headers: {
             "x-access-token": token
           }
         });
-        setuserInfo(response?.data)
-        console.log("userinfo", userInfo);
+        setuserInfo(response.data)
+       userEmail(response.data.email);
       } catch (error) {
         console.error("Error fetching user information:", error);
       }
