@@ -70,8 +70,10 @@ const totalCartValue = cart.reduce((total, cartItem) => {
               <h3>My Cart</h3>
             </div>
             <div className="cart-row">
+              <div className="order-total">
             <div className="total-cart-value">
               Total : ₹ <span>{totalCartValue.toFixed(2)} </span>
+            </div>
             </div>
             <hr/>
             <ul>

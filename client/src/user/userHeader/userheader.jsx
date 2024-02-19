@@ -4,11 +4,26 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { RiLogoutCircleRFill } from "react-icons/ri";
-import { FaCartShopping } from "react-icons/fa6";
+import { RiLogoutCircleRLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import AXIOS from "axios";
+import Badge from '@mui/material/Badge';
+import { styled } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Tooltip from '@mui/material/Tooltip';
+
+
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  '& .MuiBadge-badge': {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: '0 4px',
+  },
+}));
+
 
 function UserHeader(props) {
     const navigate = useNavigate();
@@ -54,7 +69,7 @@ function UserHeader(props) {
       <div className="navclass">
         <Navbar expand="lg" className="bg-light">
           <Container fluid>
-            <Navbar.Brand href="/" className="ta text-success">
+            <Navbar.Brand href="/userhome" className="ta text-success">
               PLANT PALS
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="navbarScroll" />
@@ -67,7 +82,7 @@ function UserHeader(props) {
                 <Nav.Link href="/userhome" className="text-success">
                   Home
                 </Nav.Link>
-                <Nav.Link href="/aboutus" className="text-success">
+                <Nav.Link href="/userabout" className="text-success">
                   About US
                 </Nav.Link>
                 <Nav.Link href="/usershop" className="text-success">
@@ -87,12 +102,16 @@ function UserHeader(props) {
                 <Button variant="outline-success">Search</Button>
               </Form>
               <div className="profile-cart">
-                <Button title="Logout" onClick={handleLogout}>
-                  <RiLogoutCircleRFill />
+              <Tooltip title="Logout" placement="top">
+                <Button title="Logout" onClick={handleLogout} tooltip>
+                <RiLogoutCircleRLine />
                 </Button>
-                <Button title="My Cart" onClick={handleViewcart}>
-                 <p>{props.cartNo}</p>
-                </Button>
+                </Tooltip>
+                <IconButton aria-label="cart" onClick={handleViewcart}>
+      <StyledBadge badgeContent={props.cartNo}  color="secondary">
+        <ShoppingCartIcon />
+      </StyledBadge>
+    </IconButton>
               </div>
             </Navbar.Collapse>
           </Container>

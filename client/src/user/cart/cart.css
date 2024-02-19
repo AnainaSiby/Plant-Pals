@@ -58,3 +58,8 @@
 .cart-remove{
     padding-top: 60px;
 }
+
+.order-btn{
+    display: flex;
+    justify-content: flex-end;
+}

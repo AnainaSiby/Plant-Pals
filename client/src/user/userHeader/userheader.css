@@ -10,16 +10,12 @@
     margin-bottom: 0 !important;
 }
 
-.d-flex input:focus{
-    box-shadow: none !important;
-    border: #198754 1px solid !important;
-}
 
 .fixed-top {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1000; /* Adjust the z-index as needed */
+    z-index: 1000; 
   }
   
   .profile-cart {
@@ -30,20 +26,14 @@
     background-color: transparent;
     color:#198754;
     border: none;
+    font-size: 22px;
   }
 
   .profile-cart button:hover{
     background-color: transparent;
     color:#198754;
     border: none;
-    font-size: large;
-  }
-
-  .profile-cart button:focus{
-    background-color: transparent;
-    color:#198754;
-    border: none;
-    font-size: large;
+    font-size: 22px;
   }
 
   .userinfo{

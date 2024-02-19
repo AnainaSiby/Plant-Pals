@@ -1,15 +1,35 @@
 import "./viewitem.css";
 import { useParams } from "react-router-dom/dist";
 import AXIOS from "axios";
-import { useState, useEffect } from "react";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import { FaCartShopping } from "react-icons/fa6";
 import UserHeader from "../../user/userHeader/userheader";
+import axios from "axios"
+import { useState,useEffect } from "react"
+import Footer from "../Footer/footer";
 
 export default function ViewItem() {
   const [plant, setPlant] = useState([]);
   const [email, setEmail] = useState("");
   const { id } = useParams();
+  const [cart, setCart] = useState([]);
+ 
+  useEffect(() => {
+   fetchCartData(email);
+  }, [])
+  
+ 
+  const fetchCartData = async (email) => {
+   try {
+     let body = {
+       "email" : email
+   }
+     const response = await axios.post('http://localhost:9000/api/cart', body);
+     setCart(response.data.carts);
+   } catch (error) {
+     console.error('Error fetching cart data:', error);
+   }
+ };
 
   useEffect(() => {
     const url = `http://localhost:9000/api/plants/${id}`;
@@ -47,8 +67,13 @@ export default function ViewItem() {
   return (
     <div>
       <Container>
-      <UserHeader userEmail={(email)=>{
+      <UserHeader cartNo={cart.filter((item, index, self) =>
+  index === self.findIndex((t) => (
+    t.pcode === item.pcode 
+  ))
+).length} userEmail={(email)=>{
           setEmail(email);
+          fetchCartData(email);
       }}/>
         <Row className="plant-main">
           <Col lg={6} className="plant-image">
@@ -81,6 +106,7 @@ export default function ViewItem() {
         </Row>
         <hr></hr>
       </Container>
+      <Footer/>
     </div>
   );
 }
