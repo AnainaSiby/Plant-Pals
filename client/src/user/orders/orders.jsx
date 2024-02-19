@@ -5,10 +5,13 @@ import Footer from '../../components/Footer/footer'
 import { useState } from 'react'
 import axios from 'axios'
 import {Row,Col, Button} from 'react-bootstrap'
+import { useParams } from 'react-router-dom'
 
 export default function Orders(){
-    const [cart, setCart] = useState([]);
+const [cart, setCart] = useState([]);
  const [email, setEmail] = useState("");
+ const { address, phone, totalprice, products} = useParams();
+ console.log("params", address, phone, totalprice, products);
  let totalCartValue = "100"
 
   const handlePlaceOrder = async () => {
@@ -16,12 +19,7 @@ export default function Orders(){
     try {
       // Prepare order data
       const orderData = {
-        products: cart.map((item) => ({
-          pcode: item.pcode,
-          name: item.name,
-          price: item.price,
-          images: item.images,
-        })),
+        products,
         totalPrice: totalCartValue,
         email: email,
         address: "User's address", // You need to replace this with the user's actual address
@@ -42,7 +40,7 @@ export default function Orders(){
   };
     return(
         <> 
-         <UserHeader/>
+         <UserHeader />
          <div className='order-details'>
         <div className='order-box '>
         <h3>ORDER SUMMARY</h3> 
@@ -53,7 +51,7 @@ export default function Orders(){
             Shipping Address
             </Col>
             <Col lg={8}>
-            details
+            {address}
             </Col>
             </Row>
             </div>
@@ -64,7 +62,7 @@ export default function Orders(){
             Contact Number
             </Col>
             <Col lg={8}>
-            details
+            {phone}
             </Col>
             </Row>
           </div>
@@ -75,7 +73,7 @@ export default function Orders(){
             Total Price
             </Col>
             <Col lg={8}>
-            ₹   details
+            ₹ {totalprice}
             </Col>
             </Row>
           </div>

@@ -8,57 +8,54 @@ import { RiLogoutCircleRLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import AXIOS from "axios";
-import Badge from '@mui/material/Badge';
-import { styled } from '@mui/material/styles';
-import IconButton from '@mui/material/IconButton';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import Tooltip from '@mui/material/Tooltip';
-
+import Badge from "@mui/material/Badge";
+import { styled } from "@mui/material/styles";
+import IconButton from "@mui/material/IconButton";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Tooltip from "@mui/material/Tooltip";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
-  '& .MuiBadge-badge': {
+  "& .MuiBadge-badge": {
     right: -3,
     top: 13,
     border: `2px solid ${theme.palette.background.paper}`,
-    padding: '0 4px',
+    padding: "0 4px",
   },
 }));
 
-
 function UserHeader(props) {
-    const navigate = useNavigate();
-    const sess = sessionStorage.getItem("token");
-    const [userInfo, setuserInfo] = useState({});
-    const {userEmail=()=>{}}=props
-    const handleViewcart = ()=>{
-       navigate('/cart')
-    }
+  const navigate = useNavigate();
+  const sess = sessionStorage.getItem("token");
+  const [userInfo, setuserInfo] = useState({});
+  const { userEmail = () => {} } = props;
+  const handleViewcart = () => {
+    navigate("/cart");
+  };
 
-    const handleLogout = () =>{
-      navigate('/')
-    }
- 
-    useEffect(() => {
-       user();
-    },[]);
+  const handleLogout = () => {
+    navigate("/");
+  };
 
-    const user = async () => {
-      const url = `http://localhost:9000/api/userinfo`;
-      try {
-        const token = sess; 
-        console.log("token",token);
-        const response = await AXIOS.get(url, {
-          headers: {
-            "x-access-token": token
-          }
-        });
-        setuserInfo(response.data)
-       userEmail(response.data.email);
-      } catch (error) {
-        console.error("Error fetching user information:", error);
-      }
-    };
-    
+  useEffect(() => {
+    user();
+  }, []);
+
+  const user = async () => {
+    const url = `http://localhost:9000/api/userinfo`;
+    try {
+      const token = sess;
+      console.log("token", token);
+      const response = await AXIOS.get(url, {
+        headers: {
+          "x-access-token": token,
+        },
+      });
+      setuserInfo(response.data);
+      userEmail(response.data.email, response.data);
+    } catch (error) {
+      console.error("Error fetching user information:", error);
+    }
+  };
 
   return (
     <div className="fixed-top">
@@ -102,16 +99,16 @@ function UserHeader(props) {
                 <Button variant="outline-success">Search</Button>
               </Form>
               <div className="profile-cart">
-              <Tooltip title="Logout" placement="top">
-                <Button  onClick={handleLogout} tooltip>
-                <RiLogoutCircleRLine />
-                </Button>
+                <Tooltip title="Logout" placement="top">
+                  <Button onClick={handleLogout} tooltip>
+                    <RiLogoutCircleRLine />
+                  </Button>
                 </Tooltip>
                 <IconButton aria-label="cart" onClick={handleViewcart}>
-      <StyledBadge badgeContent={props.cartNo}  color="secondary">
-        <ShoppingCartIcon />
-      </StyledBadge>
-    </IconButton>
+                  <StyledBadge badgeContent={props.cartNo} color="secondary">
+                    <ShoppingCartIcon />
+                  </StyledBadge>
+                </IconButton>
               </div>
             </Navbar.Collapse>
           </Container>

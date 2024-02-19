@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 export default function Cart() {
   const [cart, setCart] = useState([]);
   const [email, setEmail] = useState("");
+  const [userdata, setUserdata] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -54,8 +55,14 @@ export default function Cart() {
     return total + (cartItem.totalPrice ? cartItem.totalPrice : cartItem.price * cartItem.quantity);
   }, 0);
 
-  const handleOrder = (address, phone, totalprice, products) => {
-    const url = /place_order/${id}/${name}/${place};
+  const handleOrder = () => {
+    const { address, phone } = userdata; 
+    const productsString = JSON.stringify(cart
+      .filter(
+        (item, index, self) =>
+          index === self.findIndex((t) => t.pcode === item.pcode)
+      ));
+    const url = `/place_order/${encodeURIComponent(address)}/${phone}/${totalCartValue}/${encodeURIComponent(productsString)}`; 
     navigate(url);
   };
 
@@ -69,8 +76,9 @@ export default function Cart() {
                 index === self.findIndex((t) => t.pcode === item.pcode)
             ).length
           }
-          userEmail={(email) => {
+          userEmail={(email,userdata) => {
             setEmail(email);
+            setUserdata(userdata);
             fetchCartData(email);
           }}
         />
