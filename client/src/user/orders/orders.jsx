@@ -4,6 +4,7 @@ import UserHeader from '../userHeader/userheader'
 import Footer from '../../components/Footer/footer'
 import { useState } from 'react'
 import axios from 'axios'
+import {Row,Col, Button} from 'react-bootstrap'
 
 export default function Orders(){
     const [cart, setCart] = useState([]);
@@ -43,11 +44,59 @@ export default function Orders(){
         <> 
          <UserHeader/>
          <div className='order-details'>
-          <h3>Order Details</h3> 
-          <div>Address</div>
-          <div>Phone</div>
-          <div>Total price</div>
-          <div>Order Items</div>
+        <div className='order-box '>
+        <h3>ORDER SUMMARY</h3> 
+         <div className='order-summary shadow'>
+          <div>
+            <Row>
+            <Col lg={4}>
+            Shipping Address
+            </Col>
+            <Col lg={8}>
+            details
+            </Col>
+            </Row>
+            </div>
+          <hr></hr>
+          <div>
+          <Row>
+            <Col lg={4}>
+            Contact Number
+            </Col>
+            <Col lg={8}>
+            details
+            </Col>
+            </Row>
+          </div>
+          <hr></hr>
+          <div>
+          <Row>
+            <Col lg={4}>
+            Total Price
+            </Col>
+            <Col lg={8}>
+            ₹   details
+            </Col>
+            </Row>
+          </div>
+          <hr></hr>
+          <div>
+          <Row>
+            <Col lg={4}>
+            Order Items
+            </Col>
+            <Col lg={8}>
+            details
+            </Col>
+            </Row>
+          </div>
+          </div>
+          <div className='confirm-order'>
+           <Button variant='success'>
+            CONFIRM ORDER
+           </Button>
+          </div>
+          </div>
          </div>
          <Footer/>
         </>
