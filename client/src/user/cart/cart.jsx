@@ -54,9 +54,10 @@ export default function Cart() {
     return total + (cartItem.totalPrice ? cartItem.totalPrice : cartItem.price * cartItem.quantity);
   }, 0);
 
-  const handleOrder = () => {
-    navigate("/place_order");
-  };
+  const handleOrder = (address, phone, totalprice, products) => {
+    const url = /place_order/${id}/${name}/${place};
+    navigate(url);
+  };
 
   return (
     <div>

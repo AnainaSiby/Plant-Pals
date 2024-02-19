@@ -42,7 +42,7 @@ function App() {
         <Route path="/admin_edit/:id" element={<AdminEdit/>}/>
         <Route path="/admin_delete/:id" element={<AdminDelete/>}/>
         <Route path="/deletecart/:id" element={<CartDelete/>}/>
-        <Route path="/place_order" element={<Order/>}/>
+        <Route path="/place_order/:id/:name/:place" element={<Order/>}/>
       </Routes>
       </Suspense>
     </>

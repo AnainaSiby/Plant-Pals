@@ -4,7 +4,6 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import SignUp from '../SignUp/signup';
 import SignIn from '../SignIn/signin';
 
 
@@ -40,7 +39,6 @@ function Header() {
             <Button variant="outline-success">Search</Button>
           </Form>
           <div className='profile-cart'>
-            <SignUp/>
             <SignIn/>
           </div>
         </Navbar.Collapse>
