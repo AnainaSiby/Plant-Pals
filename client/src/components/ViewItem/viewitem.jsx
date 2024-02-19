@@ -7,6 +7,9 @@ import UserHeader from "../../user/userHeader/userheader";
 import axios from "axios"
 import { useState,useEffect } from "react"
 import Footer from "../Footer/footer";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function ViewItem() {
   const [plant, setPlant] = useState([]);
@@ -49,6 +52,9 @@ export default function ViewItem() {
           : item
       );
       setCart(updatedCart);
+      toast.error("Product already exists in the cart, please increase the quantity !",{
+        theme: "colored"
+      })
     } else {
       const url = `http://localhost:9000/api/addtocart`;
       let body = {
@@ -63,9 +69,11 @@ export default function ViewItem() {
       AXIOS.post(url, body).then((res) => {
         var stat = res.data.status;
         if (stat) {
-          alert(res.data.message);
+          toast.error(res.data.message);
         } else {
-          alert(res.data.message);
+          toast.success(res.data.message, {
+            position: "top-center"
+          });
         }
       });
     }
@@ -117,6 +125,8 @@ export default function ViewItem() {
             <h3>About the Product</h3>
           <Col>{plant.description}</Col>
         </Row>
+        <ToastContainer 
+        />
         <hr></hr>
       </Container>
       <Footer/>

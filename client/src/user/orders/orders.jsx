@@ -9,7 +9,7 @@ export default function Orders(){
     const [cart, setCart] = useState([]);
  const [email, setEmail] = useState("");
  let totalCartValue = "100"
- 
+
   const handlePlaceOrder = async () => {
 
     try {
@@ -43,7 +43,11 @@ export default function Orders(){
         <> 
          <UserHeader/>
          <div className='order-details'>
-            Order Details
+          <h3>Order Details</h3> 
+          <div>Address</div>
+          <div>Phone</div>
+          <div>Total price</div>
+          <div>Order Items</div>
          </div>
          <Footer/>
         </>
