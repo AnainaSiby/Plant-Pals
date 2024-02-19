@@ -17,6 +17,7 @@ const AdminDelete = lazy(()=>import('./admin/components/delete_plants/delete_pla
 const UserStore = lazy(()=>import('./user/userstore.jsx'))
 const CartDelete = lazy(()=>import('./user/cart/cartdelete.jsx'))
 const UserAbout = lazy(()=>import('./user/userabout/useraboutpage.jsx'))
+const Order = lazy(()=>import('./user/orders/orders.jsx'))
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
         <Route path="/admin_edit/:id" element={<AdminEdit/>}/>
         <Route path="/admin_delete/:id" element={<AdminDelete/>}/>
         <Route path="/deletecart/:id" element={<CartDelete/>}/>
+        <Route path="/place_order" element={<Order/>}/>
       </Routes>
       </Suspense>
     </>

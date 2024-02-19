@@ -1,4 +1,4 @@
-const { plantModel, userModel,cartModel } = require("../model/db_config.js");
+const { plantModel, userModel,cartModel, orderModel } = require("../model/db_config.js");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
@@ -89,7 +89,7 @@ const deletePlant = async (request,response)=>{
 
 const signUp = async (req, res) => {
   try {
-    const { name, email, phone, password } = req.body;
+    const { name, email, phone, address, password } = req.body;
     const em =
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     const nameRegEXP = /^[a-zA-Z]+(?:\s[a-zA-Z]+)*$/;
@@ -118,6 +118,7 @@ const signUp = async (req, res) => {
           name: name,
           email: email,
           phone: phone,
+          address : address,
           password: hash,
         });
       });
@@ -188,21 +189,32 @@ if (!user) {
 
 const addCart = async (req, res) => {
   try {
-    const { pcode, name, price, images, email } = req.body;
-    const product = {
-      pcode,
-      name,
-      price,
-      images,
-     email : req.body.email
-    };
-    await cartModel.create(product);
+    const { pcode, name, price, images, quantity, email } = req.body;
+
+    const existingCartItem = await cartModel.findOne({ pcode, email });
+
+    if (existingCartItem) {
+      existingCartItem.quantity += quantity;
+      await existingCartItem.save();
+    } else {
+      const product = {
+        pcode,
+        name,
+        price,
+        images,
+        quantity,
+        email,
+      };
+      await cartModel.create(product);
+    }
+
     res.status(200).json({ message: 'Product added to cart successfully' });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal server error' });
-  }
+    res.status(500).json({ message: 'Internal server error' });
+  }
 };
+
 
 //view cart
 const viewCart = async (request, response) => {
@@ -243,6 +255,27 @@ const deleteCart = async (request, response) => {
   }
 }
 
+const placeOrder = async (req, res) => {
+  try {
+    const { products, totalPrice, email, address, phone } = req.body;
+    if (!products || !totalPrice || !email || !address || !phone) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+    const newOrder = {
+      products: products,
+      totalPrice: totalPrice,
+      email: email,
+      address: address,
+      phone: phone
+    };
+    const createdOrder = await orderModel.create(newOrder);
+    res.status(201).json({ message: "Order placed successfully", order: createdOrder });
+  } catch (error) {
+    console.error("Error placing order:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+
 module.exports = {
   registerPlant,
   getPlants,
@@ -254,5 +287,6 @@ module.exports = {
   userInfo,
   addCart,
   viewCart,
-  deleteCart
+  deleteCart,
+  placeOrder
 };

@@ -11,7 +11,8 @@ const {
   userInfo,
   addCart,
   viewCart,
-deleteCart
+deleteCart,
+placeOrder
 } = require("../controls/service.js");
 const upload = require("../multer/uploads.js");
 
@@ -26,6 +27,7 @@ router.route("/userinfo").get(userInfo);
 router.route("/addtocart").post(addCart);
 router.route("/cart").post(viewCart);
 router.route("/deletecart/:pcode").delete(deleteCart);
+router.route("/order").post(placeOrder);
 
 
 module.exports = router;

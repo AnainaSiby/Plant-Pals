@@ -11,6 +11,7 @@ import Footer from "../Footer/footer";
 export default function ViewItem() {
   const [plant, setPlant] = useState([]);
   const [email, setEmail] = useState("");
+  const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
   const [cart, setCart] = useState([]);
  
@@ -38,26 +39,38 @@ export default function ViewItem() {
     });
   }, [id]);
 
-  const handleAddToCart = () =>{
-    const url = `http://localhost:9000/api/addtocart`;
-    let body = {
-      "pcode":plant.pcode,
-      "name":plant.name,
-      "price":plant.price,
-      "images":plant.images[0],
-      "email" : email
-    }
-    AXIOS.post(url, body).then(
-      (res) => {
+  const handleAddToCart = () => {
+    const existingCartItem = cart.find((item) => item.pcode === plant.pcode);
+  
+    if (existingCartItem) {
+      const updatedCart = cart.map((item) =>
+        item.pcode === plant.pcode
+          ? { ...item, quantity: item.quantity + quantity }
+          : item
+      );
+      setCart(updatedCart);
+    } else {
+      const url = `http://localhost:9000/api/addtocart`;
+      let body = {
+        pcode: plant.pcode,
+        name: plant.name,
+        price: plant.price,
+        images: plant.images[0],
+        email: email,
+        quantity: quantity,
+      };
+  
+      AXIOS.post(url, body).then((res) => {
         var stat = res.data.status;
         if (stat) {
           alert(res.data.message);
         } else {
           alert(res.data.message);
         }
-      }
-    );
-  }
+      });
+    }
+  };
+  
 
   const imageUrl =
     plant.images && plant.images.length > 0

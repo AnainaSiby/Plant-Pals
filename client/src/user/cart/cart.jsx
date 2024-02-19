@@ -5,10 +5,12 @@ import "./cart.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import DeleteCart from "./cartdelete";
+import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
   const [cart, setCart] = useState([]);
  const [email, setEmail] = useState("");
+ const navigate = useNavigate();
 
  useEffect(() => {
   fetchCartData(email);
@@ -52,6 +54,9 @@ const totalCartValue = cart.reduce((total, cartItem) => {
   return total + (cartItem.totalPrice ? cartItem.totalPrice : cartItem.price);
 }, 0);
 
+const handleOrder = () =>{
+  navigate('/place_order')
+}
 
   return (
     <div>
@@ -71,6 +76,9 @@ const totalCartValue = cart.reduce((total, cartItem) => {
             </div>
             <div className="cart-row">
               <div className="order-total">
+                <div className="order-btn">
+                  <Button variant="success" onClick={handleOrder}>PLACE ORDER</Button>
+                </div>
             <div className="total-cart-value">
               Total : ₹ <span>{totalCartValue.toFixed(2)} </span>
             </div>

@@ -103,7 +103,7 @@ function UserHeader(props) {
               </Form>
               <div className="profile-cart">
               <Tooltip title="Logout" placement="top">
-                <Button title="Logout" onClick={handleLogout} tooltip>
+                <Button  onClick={handleLogout} tooltip>
                 <RiLogoutCircleRLine />
                 </Button>
                 </Tooltip>

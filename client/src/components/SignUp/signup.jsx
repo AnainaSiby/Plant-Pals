@@ -13,18 +13,20 @@ export default function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [address, setAddress]= useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const url = "http://localhost:9000/api/signup";
-    AXIOS.post(url, { name, email, phone, password }).then((res) => {
+    AXIOS.post(url, { name, email, phone, address, password }).then((res) => {
       var stat = res.data.status;
       if (stat) {
         alert(res.data.msg);
         setName("");
         setEmail("");
         setPhone("");
+        setAddress("");
         setPassword("")
         handleClose();
       } else {
@@ -82,6 +84,17 @@ export default function SignUp() {
                 color="success"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
+                size="small"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3 formControl" controlId="formBasicEmail">
+              <TextField
+                fullWidth
+                label="Address"
+                variant="outlined"
+                color="success"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
                 size="small"
               />
             </Form.Group>
