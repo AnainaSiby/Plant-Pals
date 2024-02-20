@@ -29,15 +29,6 @@ function Header() {
             <Nav.Link  href="/aboutus" className='text-success'>About US</Nav.Link>
             <Nav.Link  href="/shop" className='text-success'>Visit Store</Nav.Link>
           </Nav>
-          <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Search</Button>
-          </Form>
           <div className='profile-cart'>
             <SignIn/>
           </div>

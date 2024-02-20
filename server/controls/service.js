@@ -2,6 +2,7 @@ const { plantModel, userModel,cartModel, orderModel } = require("../model/db_con
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
+const { search } = require("../router/routes.js");
 
 const registerPlant = async (req, res) => {
   try {
@@ -33,7 +34,11 @@ const registerPlant = async (req, res) => {
 
 const getPlants = async (request, response) => {
   try {
-    const allPlants = await plantModel.find({});
+    if(request.query.search != undefined){
+      searchQuery = request.query.search;
+      regex = new RegExp(searchQuery, 'i')
+    }
+    const allPlants = await plantModel.find({name: regex});
     response.json({ status: true, plants: allPlants });
   } catch (error) {
     console.log(error);
@@ -277,13 +282,11 @@ const placeOrder = async (req, res) => {
 }
 
 const myOrders = async(req,res) =>{
-  const {email} = req.body;
-  if (!email) {
-    return res.status(400).json({ error: 'Email parameter is required' });
-}
 try {
-    const order = await orderModel.find({ email });
+  const email = req.query.email
+    const order = await orderModel.find({email: email});
     res.json({ orders: order });
+    console.log("orders", order);
 } catch (error) {
     console.error('Error fetching orders:', error);
     res.status(500).json({ error: 'Internal server error' });

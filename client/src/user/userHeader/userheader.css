@@ -23,19 +23,13 @@
     margin-right: 30px;
   }
 
-  .profile-cart button{
-    background-color: transparent;
-    color:#198754;
-    border: none;
-    font-size: 22px;
+  .profile-cart .logout-btn button{
+   font-weight: bolder;
   }
 
-  .profile-cart button:hover{
-    background-color: transparent;
-    color:#198754;
-    border: none;
-    font-size: 22px;
-  }
+  .profile-cart .logout-btn button:hover{
+    font-size: medium;
+   }
 
   .userinfo{
     padding-right: 20px;

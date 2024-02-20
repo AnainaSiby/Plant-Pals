@@ -1,0 +1,54 @@
+.sup{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+}
+
+.sup{
+    margin-top: 50px;
+    width: 50% !important;
+}
+
+*, ::after{
+    box-shadow: none !important;
+}
+
+.formHead {
+    padding: 10px;
+    padding-bottom: 20px;
+  }
+  
+
+  .app-name-sup{
+    margin-bottom: 30px;
+    color: #198754;
+  }
+
+  .formControl{
+    width: 90% !important;
+  }
+
+  .regbtn {
+    width: 91% !important;
+    font-weight: bolder !important;
+    background-color: #1f6f4a !important;
+  }
+  
+  .regbtn:hover{
+    background-color: transparent !important;
+    border: 1px #198754 solid !important;
+    color: #198754;
+  }
+
+  .ex-user{
+    margin-top: 10px;
+  }
+
+  .ex-user button{
+    color: #198754 !important;
+    font-weight: 500;
+  }

@@ -44,7 +44,7 @@ function App() {
         <Route path="/admin_delete/:id" element={<AdminDelete/>}/>
         <Route path="/deletecart/:id" element={<CartDelete/>}/>
         <Route path="/place_order/:address/:phone/:totalprice/:email/:products" element={<Order/>}/>
-        <Route path="/myorders" element={<MyOrders/>}/>
+        <Route path="/myorders/:email" element={<MyOrders/>}/>
       </Routes>
       </Suspense>
     </>

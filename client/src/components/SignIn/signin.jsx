@@ -5,6 +5,7 @@ import { Form, Container } from "react-bootstrap";
 import { TextField, Button } from "@mui/material";
 import AXIOS from "axios";
 import "./signin.css";
+import "./signup.css"
 import { useNavigate } from "react-router-dom";
 
 export default function SignIn() {
@@ -16,6 +17,8 @@ export default function SignIn() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress]= useState("");
+  const [signin, setSignin] = useState(true)
+  const [signup, setSignup] = useState(false)
   const nav = useNavigate();
 
   const handleSignIn = (e) => {
@@ -57,13 +60,13 @@ export default function SignIn() {
   };
 
   const showSignUp = () =>{
-   document.getElementById("signin").style.display="none";
-   document.getElementById("signup").style.display="block";
+   setSignin(false)
+   setSignup(true)
   }
 
   const showSignIn = () =>{
-    document.getElementById("signup").style.display="none";
-    document.getElementById("signin").style.display="block";
+  setSignin(true)
+   setSignup(false)
    } 
 
   return (
@@ -78,8 +81,8 @@ export default function SignIn() {
         aria-describedby="modal-modal-description"
       >
         <Container className="signin-form">
-          <Form id="signin" className="p-4 form sin" onSubmit={handleSignIn}>
-            <div className="app-name">
+         { signin && <Form className="p-4 form sin" onSubmit={handleSignIn}>
+         <div className="app-name">
               <h1>PLANT PALS</h1>
             </div>
             <div className="formHead">
@@ -120,9 +123,9 @@ export default function SignIn() {
                 New Here? <Button onClick={showSignUp}>Create an Account</Button>
               </p>
             </div>
-          </Form>
-          <Form id="signup" className="p-4 form sup" onSubmit={handleSignUp} style={{display:'none'}}>
-            <div className="app-name">
+          </Form>}
+         { signup &&<Form className="p-4 form sup" onSubmit={handleSignUp}>
+            <div className="app-name-sup">
               <h1>PLANT PALS</h1>
             </div>
             <div className="formHead">
@@ -197,7 +200,7 @@ export default function SignIn() {
                 Already a user? <Button onClick={showSignIn}>Sign in</Button>
               </p>
             </div>
-          </Form>
+          </Form>}
         </Container>
       </Modal>
     </div>

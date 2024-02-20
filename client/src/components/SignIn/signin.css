@@ -1,71 +1,56 @@
-.signin-form .sin{
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 10px !important;
-    padding-left: 40px !important;
-  padding-right: 40px !important;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 5px;
-    margin-top: 100px;
-}
-
-.signin-form .sup{
+.sin{
   background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 10px !important;
-  padding-left: 40px !important;
-  padding-right: 40px !important;
   margin-left: auto;
   margin-right: auto;
   border-radius: 5px;
-  margin-top: 40px;
 }
 
-.signin-form{
-    width: 35% !important;
+.sin{
+  margin-top: 100px;
+  width: 35% !important;
 }
 
 *, ::after{
-    box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 .formHead {
-    padding: 10px;
-    padding-bottom: 20px;
-    text-align: center;
-  }
-  
+  padding: 10px;
+  padding-bottom: 20px;
+}
 
-  .app-name{
-    margin-top: 30px;
-    margin-bottom: 30px;
-    color: #198754;
-    text-align: center;
-  }
 
-  .regbtn {
-    width: 100% !important;
-    font-weight: bolder !important;
-    background-color: #1f6f4a !important;
-  }
-  
-  .regbtn:hover{
-    background-color: transparent !important;
-    border: 1px #198754 solid !important;
-    color: #198754;
-  }
+.app-name{
+  margin-top: 30px;
+  margin-bottom: 30px;
+  color: #198754;
+}
 
-  .nw-user{
-    margin-top: 30px;
-    text-align: center;
-  }
+.formControl{
+  width: 90% !important;
+}
 
-  .ex-user{
-    margin-top: 10px;
-    text-align: center;
-  }
+.regbtn {
+  width: 91% !important;
+  font-weight: bolder !important;
+  background-color: #1f6f4a !important;
+}
+
+.regbtn:hover{
+  background-color: transparent !important;
+  border: 1px #198754 solid !important;
+  color: #198754;
+}
+
+.nw-user{
+  margin-top: 30px;
+}
+
+.nw-user button{
+  color: #198754 !important;
+  font-weight: 500;
+}

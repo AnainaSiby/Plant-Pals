@@ -1,10 +1,9 @@
 import "./userheader.css";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { RiLogoutCircleRLine } from "react-icons/ri";
+import { FaSignOutAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import AXIOS from "axios";
@@ -33,6 +32,7 @@ function UserHeader(props) {
   };
 
   const handleLogout = () => {
+    sessionStorage.removeItem('token');
     navigate("/");
   };
 
@@ -87,21 +87,23 @@ function UserHeader(props) {
                 </Nav.Link>
               </Nav>
               <p className="userinfo">
-                Hi, {userInfo ? userInfo.name : "Loading..."}
+                Hi, {userInfo ? userInfo.name : "Guest" }
               </p>
               <div className="profile-cart">
+                <div className="logout-btn">
                 <Tooltip title="Logout" placement="top">
                   <Button onClick={handleLogout} tooltip>
-                    <RiLogoutCircleRLine />
+                  <FaSignOutAlt />
                   </Button>
                 </Tooltip>
+                </div>
                 <IconButton aria-label="cart" onClick={handleViewcart}>
                   <StyledBadge badgeContent={props.cartNo} color="secondary">
                     <ShoppingCartIcon />
                   </StyledBadge>
                 </IconButton>
               </div>
-              <Nav.Link href="/myorders" className="text-success">
+              <Nav.Link href={`/myorders/${userInfo.email}`} className="text-success">
                   Orders
                 </Nav.Link>
             </Navbar.Collapse>

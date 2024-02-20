@@ -15,7 +15,6 @@ export default function Orders() {
   const { address, phone, totalprice, products, email } = useParams();
   const productsArray = JSON.parse(decodeURIComponent(products));
   console.log("params", address, phone, totalprice, productsArray);
-  let totalCartValue = "100";
   const navigate = useNavigate();
 
   const handleModifyCart = () =>{
@@ -26,7 +25,7 @@ export default function Orders() {
     try {
       const orderData = {
         products : productsArray,
-        totalPrice: totalCartValue,
+        totalPrice: totalprice,
         email: email,
         address:address,
         phone:phone
@@ -40,6 +39,8 @@ export default function Orders() {
       toast.success("Hurray!!! Order placed",{
         position:'top-center'
       });
+    const  url = `/myorders/${email}`
+      navigate(url)
     } catch (error) {
       toast.error("Error placing order");
     }

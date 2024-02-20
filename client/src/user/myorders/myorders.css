@@ -1,3 +1,19 @@
 .my-orders{
     margin-top: 120px;
 }
+
+.one-order{
+    margin: 40px;
+    padding: 20px;
+}
+
+.orders{
+    margin: 30px;
+    padding-bottom: 50px;
+}
+
+.orders h3{
+    text-align: center;
+    color: green;
+
+}
