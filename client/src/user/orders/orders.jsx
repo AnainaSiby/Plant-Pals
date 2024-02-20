@@ -11,7 +11,6 @@ import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Orders() {
-  const [cart, setCart] = useState([]);
   const { address, phone, totalprice, products, email } = useParams();
   const productsArray = JSON.parse(decodeURIComponent(products));
   console.log("params", address, phone, totalprice, productsArray);
@@ -35,7 +34,7 @@ export default function Orders() {
         "http://localhost:9000/api/order",
         orderData
       );
-
+      sessionStorage.removeItem('carts')
       toast.success("Hurray!!! Order placed",{
         position:'top-center'
       });
