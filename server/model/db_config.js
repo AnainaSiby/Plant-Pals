@@ -116,7 +116,8 @@ const orderSchema = mongoose.Schema(
         pcode: String,
         name: String,
         price: Number,
-        images: [String]
+        images: [String],
+        quantity: Number
       }
     ],
     totalPrice: {

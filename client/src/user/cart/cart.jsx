@@ -62,7 +62,7 @@ export default function Cart() {
         (item, index, self) =>
           index === self.findIndex((t) => t.pcode === item.pcode)
       ));
-    const url = `/place_order/${encodeURIComponent(address)}/${phone}/${totalCartValue}/${encodeURIComponent(productsString)}`; 
+    const url = `/place_order/${encodeURIComponent(address)}/${phone}/${totalCartValue}/${email}/${encodeURIComponent(productsString)}`; 
     navigate(url);
   };
 

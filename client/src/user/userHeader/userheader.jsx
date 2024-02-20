@@ -89,15 +89,6 @@ function UserHeader(props) {
               <p className="userinfo">
                 Hi, {userInfo ? userInfo.name : "Loading..."}
               </p>
-              <Form className="d-flex">
-                <Form.Control
-                  type="search"
-                  placeholder="Search"
-                  className="me-2"
-                  aria-label="Search"
-                />
-                <Button variant="outline-success">Search</Button>
-              </Form>
               <div className="profile-cart">
                 <Tooltip title="Logout" placement="top">
                   <Button onClick={handleLogout} tooltip>
@@ -110,6 +101,9 @@ function UserHeader(props) {
                   </StyledBadge>
                 </IconButton>
               </div>
+              <Nav.Link href="/myorders" className="text-success">
+                  Orders
+                </Nav.Link>
             </Navbar.Collapse>
           </Container>
         </Navbar>

@@ -147,7 +147,7 @@ const signIn = async (req, res) => {
     }
 
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: '1h'
+      expiresIn: '3h'
     });
 
     res.json({
@@ -261,9 +261,6 @@ const deleteCart = async (request, response) => {
 const placeOrder = async (req, res) => {
   try {
     const { products, totalPrice, email, address, phone } = req.body;
-    if (!products || !totalPrice || !email || !address || !phone) {
-      return res.status(400).json({ message: "All fields are required" });
-    }
     const newOrder = {
       products: products,
       totalPrice: totalPrice,
@@ -279,6 +276,22 @@ const placeOrder = async (req, res) => {
   }
 }
 
+const myOrders = async(req,res) =>{
+  const {email} = req.body;
+  if (!email) {
+    return res.status(400).json({ error: 'Email parameter is required' });
+}
+try {
+    const order = await orderModel.find({ email });
+    res.json({ orders: order });
+} catch (error) {
+    console.error('Error fetching orders:', error);
+    res.status(500).json({ error: 'Internal server error' });
+    }
+
+
+}
+
 module.exports = {
   registerPlant,
   getPlants,
@@ -291,5 +304,6 @@ module.exports = {
   addCart,
   viewCart,
   deleteCart,
-  placeOrder
+  placeOrder,
+  myOrders
 };

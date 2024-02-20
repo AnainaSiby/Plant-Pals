@@ -4,6 +4,8 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AXIOS from "axios";
 import "./cartdelete.css";
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 export default function DeleteCart(props) {
   const [open, setOpen] = React.useState(false);
@@ -15,7 +17,7 @@ export default function DeleteCart(props) {
   const handleDelete = () => {
     const url = `http://localhost:9000/api/deletecart/${props.itemId}`;
     AXIOS.delete(url).then((response) => {
-      alert(response.data.message);
+      toast.error(response.data.message);
       handleClose();
       window.location.reload();
     });
@@ -56,6 +58,7 @@ export default function DeleteCart(props) {
         </div>
         </div>
       </Modal>
+      <ToastContainer />
     </div>
   );
 }
