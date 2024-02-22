@@ -1,7 +1,6 @@
 import { Button, Col, Row } from "react-bootstrap";
 import Modal from "@mui/material/Modal";
 import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import AXIOS from "axios";
 import "./cartdelete.css";
 import { toast, ToastContainer } from "react-toastify";
@@ -11,8 +10,6 @@ export default function DeleteCart(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const { id } = useParams();
-  const navigate = useNavigate();
 
   const handleDelete = () => {
     const url = `http://localhost:9000/api/deletecartitem/${props.itemId}/${props.email}`;

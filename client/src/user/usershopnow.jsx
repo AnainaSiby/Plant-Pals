@@ -9,7 +9,7 @@ export default function UserShopNow() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const url = "http://localhost:9000/api/plants";
+    const url = "http://localhost:9000/api/plants?search=";
     AXIOS.get(url).then((response) => {
       setPlants(response.data.plants);
     });

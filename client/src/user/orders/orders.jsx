@@ -1,8 +1,6 @@
-import { defer } from "react-router-dom";
 import "./orders.css";
 import UserHeader from "../userHeader/userheader";
 import Footer from "../../components/Footer/footer";
-import { useState } from "react";
 import axios from "axios";
 import { Row, Col, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
@@ -13,7 +11,6 @@ import "react-toastify/dist/ReactToastify.css";
 export default function Orders() {
   const { address, phone, totalprice, products, email } = useParams();
   const productsArray = JSON.parse(decodeURIComponent(products));
-  console.log("params", address, phone, totalprice, productsArray);
   const navigate = useNavigate();
 
   const handleModifyCart = () => {
@@ -36,7 +33,7 @@ export default function Orders() {
         address: address,
         phone: phone,
       };
-      const response = await axios.post(
+      await axios.post(
         "http://localhost:9000/api/order",
         orderData
       );

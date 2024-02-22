@@ -32,7 +32,7 @@ function UserHeader(props) {
   };
 
   const handleLogout = () => {
-    sessionStorage.removeItem('token');
+    sessionStorage.removeItem("token");
     navigate("/");
   };
 
@@ -44,7 +44,6 @@ function UserHeader(props) {
     const url = `http://localhost:9000/api/userinfo`;
     try {
       const token = sess;
-      console.log("token", token);
       const response = await AXIOS.get(url, {
         headers: {
           "x-access-token": token,
@@ -87,15 +86,15 @@ function UserHeader(props) {
                 </Nav.Link>
               </Nav>
               <p className="userinfo">
-                Hi, {userInfo ? userInfo.name : "Guest" }
+                Hi, {userInfo ? userInfo.name : "Guest"}
               </p>
               <div className="profile-cart">
                 <div className="logout-btn">
-                <Tooltip title="Logout" placement="top">
-                  <Button onClick={handleLogout} tooltip>
-                  <FaSignOutAlt />
-                  </Button>
-                </Tooltip>
+                  <Tooltip title="Logout" placement="top">
+                    <Button onClick={handleLogout} tooltip>
+                      <FaSignOutAlt />
+                    </Button>
+                  </Tooltip>
                 </div>
                 <IconButton aria-label="cart" onClick={handleViewcart}>
                   <StyledBadge badgeContent={props.cartNo} color="secondary">
@@ -103,9 +102,12 @@ function UserHeader(props) {
                   </StyledBadge>
                 </IconButton>
               </div>
-              <Nav.Link href={`/myorders/${userInfo.email}`} className="text-success">
-                  Orders
-                </Nav.Link>
+              <Nav.Link
+                href={`/myorders/${userInfo.email}`}
+                className="text-success"
+              >
+                Orders
+              </Nav.Link>
             </Navbar.Collapse>
           </Container>
         </Navbar>

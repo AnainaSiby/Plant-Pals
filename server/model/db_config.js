@@ -55,7 +55,7 @@ const userSchema = mongoose.Schema(
     },
     address: {
       type: String,
-      requied : true
+      requied: true,
     },
     password: {
       type: String,
@@ -86,30 +86,30 @@ const cartSchema = mongoose.Schema(
       requied: true,
     },
     email: {
-      type :String,
-      requied :true
+      type: String,
+      requied: true,
     },
     quantity: {
-      type :Number,
-      requied :true,
-      default: 1
-    }
+      type: Number,
+      requied: true,
+      default: 1,
+    },
   },
   {
     timestamps: true,
   }
 );
 
-const cartModel = mongoose.model("cart",cartSchema)
+const cartModel = mongoose.model("cart", cartSchema);
 
 const orderSchema = mongoose.Schema(
   {
     orderId: {
       type: String,
       required: true,
-      default: () => { 
-        return 'ORD_' + Date.now();
-      }
+      default: () => {
+        return "ORD_" + Date.now();
+      },
     },
     products: [
       {
@@ -117,36 +117,36 @@ const orderSchema = mongoose.Schema(
         name: String,
         price: Number,
         images: [String],
-        quantity: Number
-      }
+        quantity: Number,
+      },
     ],
     totalPrice: {
       type: String,
-      required: true
+      required: true,
     },
     email: {
       type: String,
-      required: true
+      required: true,
     },
     address: {
       type: String,
-      required: true
+      required: true,
     },
     phone: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   {
     timestamps: true,
   }
 );
 
-const orderModel = mongoose.model("orders",orderSchema)
+const orderModel = mongoose.model("orders", orderSchema);
 
 module.exports = {
   plantModel,
   userModel,
   cartModel,
-  orderModel
+  orderModel,
 };
