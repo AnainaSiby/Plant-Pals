@@ -11,7 +11,8 @@
 }
 
 .f-end hr{
-    color: #198754
+    color: #198754;
+    margin: 0 !important;
 }
 
 .f-copy{

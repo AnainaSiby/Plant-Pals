@@ -19,8 +19,11 @@
     text-align: center;
 }
 
-.shop-now{
-    margin-top: 130px;
+
+.shop-now h3{
+    padding-bottom: 30px;
+    text-align: center;
+    color:#198754;
 }
 
 a{
@@ -30,4 +33,14 @@ a{
 .view-pro-button button{
     width: 100%;
     margin-top: 5px;
+}
+
+.view-all{
+    display: flex;
+   justify-content: center;
+   padding-bottom: 40px;
+}
+
+.view-all button{
+    width: 20%;
 }

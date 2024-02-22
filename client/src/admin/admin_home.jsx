@@ -1,11 +1,18 @@
-import AddPlant from "./components/add_plants/add_plants"
+import About from "../components/About/about"
+import Banner from "../components/Banner/banner"
+import Features from "../components/Features/features"
+import Footer from "../components/Footer/footer"
+import AdminHeader from "./components/admin_header/ad_header"
 
 
 export default function AdminHome(){
     return(
         <div>
-           <AddPlant/>
-           
+            <AdminHeader/>
+            <Banner/>
+            <About/>
+            <Features/>
+            <Footer/>           
         </div>
     )
 }

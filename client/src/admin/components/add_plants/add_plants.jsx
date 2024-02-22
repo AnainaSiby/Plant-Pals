@@ -8,7 +8,6 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
-import { useNavigate } from "react-router-dom";
 
 
 export default function AddPlant() {
@@ -18,12 +17,6 @@ export default function AddPlant() {
   const [description, setDescription] = useState("");
   const [images, setImages] = useState([]);
   const formdata = new FormData();
-  const navigate = useNavigate();
-
-
-  const handleViewPlants = ()=>{
-      navigate('/viewallplants')
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -139,9 +132,6 @@ export default function AddPlant() {
               ADD
             </Button>
           </Form>
-          <button onClick={handleViewPlants}>
-              view plants
-            </button>
         </Col>
       </Row>
     </Container>

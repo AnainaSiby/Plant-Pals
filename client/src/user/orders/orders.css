@@ -1,0 +1,29 @@
+.order-details{
+    margin-top: 100px;
+    padding: 50px;
+}
+
+.order-box{
+    border: green 1px solid;
+    padding: 30px;
+}
+
+.order-summary{
+    padding: 30px;
+}
+
+.order-box h3{
+    color: green;
+    text-align: center;
+    padding-bottom: 35px;
+}
+
+.confirm-order{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 35px;
+}
+
+.product-items{
+    display: flex;
+}

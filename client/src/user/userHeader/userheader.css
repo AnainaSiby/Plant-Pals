@@ -1,0 +1,37 @@
+.header1{
+    background-color: #114b30;
+    padding: 6px;
+    display: flex;
+    justify-content: space-around;
+    color: rgb(210, 203, 203);
+}
+
+*{
+    margin-bottom: 0 !important;
+}
+
+
+.fixed-top {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; 
+  }
+  
+  .profile-cart {
+    display: flex;
+    margin-right: 30px;
+  }
+
+  .profile-cart .logout-btn button{
+   font-weight: bolder;
+  }
+
+  .profile-cart .logout-btn button:hover{
+    font-size: medium;
+   }
+
+  .userinfo{
+    padding-right: 20px;
+    color: #198754;
+  }

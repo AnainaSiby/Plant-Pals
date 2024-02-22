@@ -12,10 +12,12 @@ export default function Footer(){
                     </Col>
                 </Row>
             </Container>
-            <Container fluid className='f-end'>
+            <Container fluid className='f-end' style={{padding:"0", margin:"0"}}>
             <Row>
-                <Col>
-                </Col>
+                <img 
+                src="/footer-bg.jpg"
+                    alt="footer-img"
+                />
             </Row>
             <hr></hr>
             <Row className='f-copy'>

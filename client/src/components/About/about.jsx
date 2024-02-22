@@ -1,8 +1,13 @@
 
-import { Container,Row,Col } from "react-bootstrap"
+import { Container,Row,Col, Button } from "react-bootstrap"
 import './about.css'
+import { useNavigate } from "react-router-dom";
 
 function About(){
+  const navigate = useNavigate()
+  const handleReadMore = ()=>{
+       navigate('/aboutus')
+  }
     return(
         <Container fluid className="about" id="about">
            <Row>
@@ -25,10 +30,12 @@ function About(){
 
 At Plant Pals we believe that we are more than a garden store, we help people grow along their gardening journey, Afterall plants grow people. We believe in the magic of growing things and discovering our inner self in the process while reveling in the jot of your first new leaf, your first bloom, or your first sprouted seed.<br></br>
 <br></br>
-
-Plant Pals prides itself in the fact that it is not just an online garden store or online plant nursery but a friend who helps both you and your garden grow. We provide a lifetime of gardening support and hand hold you through all your gardening journeys.
-
             </p>
+            <div className="read-more">
+              <Button variant="success" onClick={handleReadMore}>
+                Read More...
+              </Button>
+            </div>
             </div>
             </Col>
             </Row>

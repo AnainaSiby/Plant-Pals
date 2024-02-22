@@ -2,24 +2,31 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import "./shopnow.css";
 import AXIOS from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function ShopNow() {
   const [plants, setPlants] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const url = "http://localhost:9000/api/plants";
+    const url = "http://localhost:9000/api/plants?search=";
     AXIOS.get(url).then((response) => {
       setPlants(response.data.plants);
     });
   }, []);
 
+  const handleViewAll = ()=>{
+    navigate('/shop')
+  }
+
   return (
     <div>
       <Container className="shop-now">
+        <h3>SHOP NOW</h3>
         <Row>
           <Col className="plant-cards">
             <Row>
-              {plants.map((plant, index) => (
+              {plants.slice(0,4).map((plant, index) => (
                 <Col lg={3}>
                   <div className="plant-card">
                     <div key={plant._id}>
@@ -46,6 +53,9 @@ export default function ShopNow() {
                 </Col>
               ))}
             </Row>
+            <div className="view-all">
+            <Button variant="outline-success" onClick={handleViewAll}>View All</Button>
+            </div>
           </Col>
         </Row>
       </Container>

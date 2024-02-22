@@ -1,0 +1,39 @@
+.plant-card{
+    margin-bottom: 30px !important;
+    display: flex;
+}
+
+
+.plant-card .plant-name{
+    margin-top: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: #095f37;
+
+}
+
+.plant-card .plant-price{
+    margin-top: 5px;
+    color: #2aa16a;
+    text-align: center;
+}
+
+.shop-now{
+    margin-top: 130px;
+}
+
+.shop-now h3{
+    padding-bottom: 30px;
+    text-align: center;
+    color:#198754;
+}
+
+a{
+    text-decoration: none !important;
+}
+
+.view-pro-button button{
+    width: 100%;
+    margin-top: 5px;
+}
