@@ -8,7 +8,7 @@ export default function ViewPlants() {
   const [plants, setPlants] = useState([]);
 
   useEffect(() => {
-    const url = "http://localhost:9000/api/plants";
+    const url = "http://localhost:9000/api/plants?search=";
     AXIOS.get(url).then((response) => {
       setPlants(response.data.plants);
     });

@@ -52,19 +52,29 @@ export default function Cart() {
 
   // Calculate total cart value
   const totalCartValue = cart.reduce((total, cartItem) => {
-    return total + (cartItem.totalPrice ? cartItem.totalPrice : cartItem.price * cartItem.quantity);
+    return (
+      total +
+      (cartItem.totalPrice
+        ? cartItem.totalPrice
+        : cartItem.price * cartItem.quantity)
+    );
   }, 0);
 
   const handleOrder = () => {
-    const { address, phone } = userdata; 
-    const productsString = JSON.stringify(cart
-      .filter(
+    const { address, phone } = userdata;
+    const productsString = JSON.stringify(
+      cart.filter(
         (item, index, self) =>
           index === self.findIndex((t) => t.pcode === item.pcode)
-      ));
-    const url = `/place_order/${encodeURIComponent(address)}/${phone}/${totalCartValue}/${email}/${encodeURIComponent(productsString)}`; 
+      )
+    );
+    const url = `/place_order/${encodeURIComponent(
+      address
+    )}/${phone}/${totalCartValue}/${email}/${encodeURIComponent(
+      productsString
+    )}`;
     navigate(url);
-  };
+  };
 
   return (
     <div>
@@ -76,7 +86,7 @@ export default function Cart() {
                 index === self.findIndex((t) => t.pcode === item.pcode)
             ).length
           }
-          userEmail={(email,userdata) => {
+          userEmail={(email, userdata) => {
             setEmail(email);
             setUserdata(userdata);
             fetchCartData(email);
@@ -144,7 +154,10 @@ export default function Cart() {
                           </Row>
                         </Col>
                         <Col className="cart-remove">
-                          <DeleteCart itemId={cartItem.pcode} />
+                          <DeleteCart
+                            itemId={cartItem.pcode}
+                            email={cartItem.email}
+                          />
                         </Col>
                       </Row>
                     </li>

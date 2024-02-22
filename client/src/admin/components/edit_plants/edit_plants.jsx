@@ -35,12 +35,14 @@ export default function EditBook() {
   const handleEdit = (e) => {
     e.preventDefault();
     const url = `http://localhost:9000/api/editplant/${id}`;
+    formdata.append("pcode", pcode);
+    formdata.append("name", name);
+    formdata.append("price", price);
+    formdata.append("description", description);
     for (let i = 0; i < images.length; i++) {
       formdata.append("images", images[i]);
     }
-    AXIOS.put(url, formdata, {
-      headers: { "Content-Type": "multipart/form-data" },
-    }).then((response) => {
+   AXIOS.put(url,formdata,{"Content-Type": "multipart/form-data" }).then((response)=>{
       var stat = response.data.status;
       if (stat) {
         alert(response.data.message);

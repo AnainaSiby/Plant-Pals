@@ -11,6 +11,7 @@ const {
   userInfo,
   addCart,
   viewCart,
+  deleteCartItem,
 deleteCart,
 placeOrder,
 myOrders
@@ -22,12 +23,13 @@ router.route("/plants").get(getPlants);
 router.route("/plants/:id").get(showPlant);
 router.route("/signup").post(signUp);
 router.route("/signin").post(signIn);
-router.route("/editplant/:id").put(updatePlant);
+router.route("/editplant/:id").put(upload.array("images", 5), updatePlant);
 router.route("/deleteplant/:id").delete(deletePlant);
 router.route("/userinfo").get(userInfo);
 router.route("/addtocart").post(addCart);
 router.route("/cart").post(viewCart);
-router.route("/deletecart/:pcode").delete(deleteCart);
+router.route("/deletecartitem/:pcode/:email").delete(deleteCartItem);
+router.route("/deletecart/:email").delete(deleteCart);
 router.route("/order").post(placeOrder);
 router.route("/myorders").get(myOrders);
 

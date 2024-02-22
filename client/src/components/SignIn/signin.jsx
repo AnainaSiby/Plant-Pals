@@ -108,6 +108,7 @@ export default function SignIn() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 size="small"
+                type="password"
               />
             </Form.Group>
             <Button

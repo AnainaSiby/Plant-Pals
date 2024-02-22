@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 const { search } = require("../router/routes.js");
+const { request, response } = require("express");
 
 const registerPlant = async (req, res) => {
   try {
@@ -59,9 +60,19 @@ const showPlant = async (request, response) => {
 //Update
 const updatePlant =async (request,response) =>{
   try{
+    const {pcode, name, price, description} = request.body;
     const {id} = request.params;
-    const result = await plantModel.findByIdAndUpdate(id,request.body);
-
+    const images = request.files
+    ? request.files.map((file)=>file.filename)
+    :undefined;
+    const Plant = {
+      pcode: pcode,
+        name: name,
+        price: price,
+        description: description,
+        images: images,
+    }
+    const result = await plantModel.findByIdAndUpdate(id, Plant);
     if(!result) {
       response.json({"status":false , "message":"Id not found"})
     }else{
@@ -246,16 +257,33 @@ const viewCart = async (request, response) => {
 
 //delete cart item
 
-const deleteCart = async (request, response) => {
+const deleteCartItem = async (request, response) => {
   try {
-    const { pcode } = request.params;
-    const filter = { pcode: pcode };
+    const { pcode, email } = request.params;
+    const filter = { pcode: pcode, email: email };
     const result = await cartModel.deleteMany(filter);
-
     if (result.deletedCount > 0) {
       response.json({ "status": true, "message": "Items have been removed from cart!" });
     } else {
       response.json({ "status": false, "message": "Items not found!" });
+    }
+  } catch (error) {
+    console.error("Error occurred while deleting documents", error);
+    response.status(500).json({ "status": false, "message": "Internal server error" });
+  }
+}
+
+//delete cart when order placed
+
+const deleteCart = async (request,response) =>{
+  try {
+    const { email } = request.params;
+    const filter = { email: email };
+    const result = await cartModel.deleteMany(filter);
+    if (result.deletedCount > 0) {
+      response.json({ "status": true, "message": "Cart deleted" });
+    } else {
+      response.json({ "status": false, "message": "Cart not found!" });
     }
   } catch (error) {
     console.error("Error occurred while deleting documents", error);
@@ -306,6 +334,7 @@ module.exports = {
   userInfo,
   addCart,
   viewCart,
+  deleteCartItem,
   deleteCart,
   placeOrder,
   myOrders
