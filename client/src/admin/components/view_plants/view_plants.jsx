@@ -29,7 +29,7 @@ export default function ViewPlants() {
                         <img
                           src={`http://localhost:9000/${plant.images[0]}`}
                           alt="plant_image"
-                          style={{ width: "250px", height: "300px" }}
+                          style={{ width: "250px", height: "300px", borderRadius:"10px"}}
                         ></img>
                       </div>
                       <div className="plant-name">{plant.name}</div>

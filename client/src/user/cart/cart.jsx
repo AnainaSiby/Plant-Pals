@@ -122,7 +122,7 @@ export default function Cart() {
                           <img
                             src={`http://localhost:9000/${cartItem.images}`}
                             alt="plant_image"
-                            style={{ width: "250px", height: "200px" }}
+                            style={{ width: "250px", height: "200px", borderRadius:"25px" }}
                           ></img>
                         </Col>
                         <Col>

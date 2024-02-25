@@ -2,25 +2,41 @@ import "./orders.css";
 import UserHeader from "../userHeader/userheader";
 import Footer from "../../components/Footer/footer";
 import axios from "axios";
+import { useState, useEffect } from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import '@stripe/react-stripe-js';
 
 export default function Orders() {
   const { address, phone, totalprice, products, email } = useParams();
   const productsArray = JSON.parse(decodeURIComponent(products));
   const navigate = useNavigate();
+  const stripe = useStripe();
+  const elements = useElements();
+  const [clientSecret, setClientSecret] = useState('');
 
   const handleModifyCart = () => {
     navigate("/cart");
   };
 
+  useEffect(() => {
+    const fetchClientSecret = async () => {
+      const response = await axios.post('http://localhost:9000/api/payment', {
+        amount: totalprice, 
+      });
+      setClientSecret(response.data.clientSecret);
+    };
+
+    fetchClientSecret();
+  }, [totalprice]);
+
   const deleteCart = (email) => {
     const url = `http://localhost:9000/api/deletecart/${email}`;
     axios.delete(url).then((response) => {
-      toast.error(response.data.message);
     });
   };
 
@@ -47,6 +63,30 @@ export default function Orders() {
       toast.error("Error placing order");
     }
   };
+
+  const handlePayment = async (event) => {
+    event.preventDefault();
+    if (!stripe || !elements) {
+      return;
+    }
+    const result = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: elements.getElement(CardElement),
+        billing_details: {
+          name: 'Anaina Siby'
+        }
+      }
+    });
+    if (result.error) {
+      toast.error(result.error.message)
+    } else {
+      if (result.paymentIntent.status === 'succeeded') {
+        toast.success("Payment successful")
+        handlePlaceOrder();
+      }
+    }
+  };
+
 
   return (
     <>
@@ -89,7 +129,7 @@ export default function Orders() {
             </div>
             <hr></hr>
             <div>
-              <Row style={{ marginTop: "20px" }}>
+              <Row style={{ marginTop: "20px",}}>
                 <Col lg={4}>Order Items</Col>
 
                 <Col lg={8}>
@@ -102,7 +142,7 @@ export default function Orders() {
                         <img
                           src={`http://localhost:9000/${product.images}`}
                           alt="plant_image"
-                          style={{ width: "150px", height: "120px" }}
+                          style={{ width: "150px", height: "120px", borderRadius:"10px" }}
                         ></img>
                       </Col>
                       <Col>
@@ -128,6 +168,17 @@ export default function Orders() {
                     </Col>
                   ))}
                 </Col>
+                <div>
+                <hr></hr>
+                  <Row style={{marginTop:"30px"}}>
+                    <Col lg={4}>
+                      Enter Card details
+                    </Col>
+                    <Col lg={8}>
+                    <CardElement />
+                    </Col>
+                  </Row>
+                </div>
               </Row>
             </div>
           </div>
@@ -139,12 +190,15 @@ export default function Orders() {
             >
               MODIFY CART
             </Button>
-            <Button variant="success" onClick={handlePlaceOrder}>
+            <Button variant="success" onClick={handlePayment}>
               CONFIRM ORDER
             </Button>
           </div>
         </div>
       </div>
+      <div>
+</div>
+
       <ToastContainer />
       <Footer />
     </>

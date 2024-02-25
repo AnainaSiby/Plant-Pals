@@ -50,7 +50,7 @@ export default function MyOrders() {
                           <img
                             src={`http://localhost:9000/${product.images}`}
                             alt="plant_image"
-                            style={{ width: "150px", height: "120px" }}
+                            style={{ width: "150px", height: "120px", borderRadius:"10px" }}
                           ></img>
                         </Col>
                         <Col>
