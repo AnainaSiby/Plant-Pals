@@ -30,7 +30,7 @@ export default function ShowPlant() {
               <img
                 src={imageUrl}
                 alt="plant_image"
-                style={{ width: "550px", height: "500px" }}
+                style={{ width: "550px", height: "500px", borderRadius:"10px" }}
               ></img>
             </div>
           </Col>

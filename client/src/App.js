@@ -1,6 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import Header from "./components/Header/Header.jsx";
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+const stripePromise = loadStripe('pk_test_51OnCLrSBCczEzRYa7PnrIqvhXIC5lfSFYF3s2IFMltS5eHvhFy6ka7k77Rjv1XDt4EEXvlBpx9DF0sAnJc1TS6BH00Ax0yEe7S'); 
 
 const Home = lazy(()=> import('./pages/home.jsx'))
 const Admin = lazy(()=>import('./admin/admin_home.jsx'))
@@ -43,7 +46,11 @@ function App() {
         <Route path="/admin_edit/:id" element={<AdminEdit/>}/>
         <Route path="/admin_delete/:id" element={<AdminDelete/>}/>
         <Route path="/deletecart/:id" element={<CartDelete/>}/>
-        <Route path="/place_order/:address/:phone/:totalprice/:email/:products" element={<Order/>}/>
+        <Route path="/place_order/:address/:phone/:totalprice/:email/:products" element={
+           <Elements stripe={stripePromise}>
+              <Order/>
+            </Elements>
+          }/>
         <Route path="/myorders/:email" element={<MyOrders/>}/>
       </Routes>
       </Suspense>

@@ -9,6 +9,9 @@ const saltRounds = 10;
 const jwt = require("jsonwebtoken");
 const { search } = require("../router/routes.js");
 const { request, response } = require("express");
+require("dotenv").config();
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
+
 
 const registerPlant = async (req, res) => {
   try {
@@ -42,7 +45,7 @@ const getPlants = async (request, response) => {
   try {
     if (request.query.search != undefined) {
       searchQuery = request.query.search;
-      regex = new RegExp(searchQuery, "i");
+     regex = new RegExp(searchQuery, "i");
     }
     const allPlants = await plantModel.find({ name: regex });
     response.json({ status: true, plants: allPlants });
@@ -316,6 +319,20 @@ const placeOrder = async (req, res) => {
   }
 };
 
+//payment integration
+const payment = async (req, res) => {
+  const total = req.body.amount;
+  try {
+      const paymentIntent = await stripe.paymentIntents.create({
+          amount: total *100,
+          currency: 'inr',
+      });
+      res.status(200).json({ clientSecret: paymentIntent.client_secret });
+  } catch (err) {
+      res.status(500).json({ error: err.message });
+  }
+};
+
 const myOrders = async (req, res) => {
   try {
     const email = req.query.email;
@@ -342,4 +359,5 @@ module.exports = {
   deleteCart,
   placeOrder,
   myOrders,
+  payment
 };
